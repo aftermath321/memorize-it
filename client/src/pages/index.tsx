@@ -1,9 +1,25 @@
 import Head from 'next/head'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import { useState, useEffect } from 'react';
+import Card from './../../types/Card';
 
 export default function Home() {
+
+  const [allCards, setAllCards] = useState <Card[]>([])
+
+  const url = "http://localhost:3000/cards";
+
+  async function getCards(): Promise<void> {
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      setAllCards(data);
+    } catch (err) {
+      throw { message: { err } };
+    }
+  }
+
+
+
   return (
     <>
       <Head>
@@ -13,7 +29,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-      
+      <div className="test">
+        <p>Test</p>
+        <button onClick={() => getCards()}>Fetch</button>
+        <p></p>
+      </div>
       </main>
     </>
   )
