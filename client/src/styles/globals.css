@@ -1,6 +1,63 @@
-.test{
-    width: 100px;
-    aspect-ratio: 1;
-    background-color: red;
-    
+:root{
+    --cardWidth: clamp(300px, 400px,500px);
+    --cardHeight: 500px;
+}
+body{
+background-color: red;
+color: #fff;
+font-size: 16px;
+}
+
+.cardWrapper{
+    width: 500px;
+    height: 500px;
+    z-index: 2;
+
+    position: relative;
+    display: flex;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+.card{
+    width: var(--cardWidth);
+    height: var(--cardHeight);
+    z-index: 5;
+    position: absolute;
+
+    color: #fff;
+    background-color: #131313;
+    border: #131313 solid 2px;
+    border-radius: 20px;
+}
+.answer{
+    width: var(--cardWidth);
+    height: var(--cardHeight);
+    z-index: 4;
+    position: absolute;
+
+    color:#131313;
+    background-color: #fff;
+    border: #131313 solid 2px;
+    border-radius: 20px; 
+}
+
+.addCards{
+    display:flex;
+    flex-direction: column;
+    gap: 2em;
+    width: 40vw;
+}
+
+.addCards input{
+    height: 2em;
+}
+
+@keyframes topCard {
+    0% {transform: translateX(25)}
+    25% {transform: translateX(25)}
+    50% {transform: translateX(25)}
+    75% {transform: translateX(25)}
+    100% {}
 }

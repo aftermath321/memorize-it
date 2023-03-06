@@ -17,7 +17,7 @@ Content-Type: application/json
 GET http://localhost:3000/cards/6400e0cbe1a4372705f27795
 
 ###
-DELETE http://localhost:3000/cards/6400e0cbe1a4372705f27795
+DELETE http://localhost:3000/cards/6404f35953e67a3b6c6077dd
 
 ###
 PATCH http://localhost:3000/cards/6400e6730029c131f37ac43d
@@ -25,4 +25,16 @@ Content-Type: application/json
 
 {
     "name": "API"
+}
+
+###
+POST http://localhost:3000/cards
+Content-Type: application/json
+
+{
+    "name": "aa",
+    "question": "question", 
+    "answer": "answer", 
+    "author": "author", 
+    "tags": ["tags"]
 }
