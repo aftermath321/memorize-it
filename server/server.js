@@ -5,6 +5,7 @@ require('dotenv').config();
 const app = express();
 
 
+
 app.use(cors())
 mongoose.connect(process.env.DB_URI);
 const db = mongoose.connection;
@@ -17,3 +18,5 @@ const cardsRouter = require('./routes/cards');
 app.use('/cards', cardsRouter);
 
 app.listen(3000, () => console.log('Server has started on port 3000'));
+
+

@@ -3,22 +3,14 @@ import { useState, useEffect } from 'react';
 import Card from '../components/Card';
 import handleDelete from './api/deleteCard'
 import Link from 'next/link';
+import getHandle  from './api/getCards'
 
 export default function Home() {
 
   const [allCards, setAllCards] = useState([])
 
-  const url = "http://localhost:3000/cards";
-
-  async function getCards(){
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
-      console.log(data)
-      setAllCards(data);
-    } catch (err) {
-      throw { message: { err } };
-    }
+  async function allCardsHandle(){
+   setAllCards(await getHandle());
   }
 
   const showCard = () => {
@@ -37,7 +29,7 @@ export default function Home() {
     }
   }
 
-  async function deleteCard  (id ){
+  async function deleteCard  (id){
     handleDelete(id);
     setAllCards((prevState) => {
       return prevState.filter((card) => card._id !== id)
@@ -57,8 +49,8 @@ export default function Home() {
 
       <main>
         <div>
-          <button onClick={() => getCards()}>Show first card</button>
-          <button onClick={() => randomCard()}>Random</button>
+          <button onClick={() => allCardsHandle()}>Show first card</button>
+          <Link  href='/random'><button>Random</button></Link>
           <Link href='/addCards'><button>add</button></Link>
           {showCard()}
           <ul>

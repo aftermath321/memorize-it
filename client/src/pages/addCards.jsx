@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, {useState} from 'react'
-import handlePost from './api/postCard';
+import handlePost from './api/postCards';
 
 const addCards = () => {
     const [name, setName] = useState('')
@@ -43,7 +43,7 @@ const addCards = () => {
 
   return (
     <div>
-      <Link href='/'>Homepage</Link>
+      <Link href="/"><button>Homepage</button></Link>
       <form className='addCards' onSubmit={handleSubmit}>
         <input
           placeholder="Name"
