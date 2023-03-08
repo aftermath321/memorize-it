@@ -1,12 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const Card = (props) => {
+const Card = ({cards, numbers}) => {
   const [card, setCard] = useState();
+  const [number, setNumber]  = useState();
 
   useEffect(() => {
-    setCard(props?.data);
-  }, []);
+    setCard(cards);
+    setNumber(numbers);
+  }, [numbers]);
 
   return (
     <div className="cardWrapper">
