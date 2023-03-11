@@ -3,6 +3,7 @@ import getHandle from "./api/getCards";
 import Link from "next/link";
 import Card from "../components/Card";
 import CardShow from "./../components/CardShow";
+import Header from '../components/Header'
 
 const random = () => {
   const [cardList, setCardList] = useState([]);
@@ -79,6 +80,8 @@ const random = () => {
 
   return (
     <div>
+      <Header />
+
       <Link href="/">
         <button>Homepage</button>
       </Link>
