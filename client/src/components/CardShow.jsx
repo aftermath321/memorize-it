@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
+import { MdArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
 
 const CardShow = ({ cards }) => {
   const [cardList, setCardList] = useState([]);
@@ -33,10 +34,16 @@ const CardShow = ({ cards }) => {
   }
 
   return (
-    <div>
-      <button onClick={() => prevCard()}>Back</button>
+    <div className="cardShow">
+      <div onClick={() => prevCard()} className="selectors">
+        <MdArrowBackIos size={50} />
+        <span>Back</span>
+      </div>
       {renderCard()}
-      <button onClick={() => nextCard()}>Next</button>
+      <div onClick={() => nextCard()} className="selectors">
+        <MdOutlineArrowForwardIos size={50} />
+        <span>Next</span>
+      </div>
     </div>
   );
 };
