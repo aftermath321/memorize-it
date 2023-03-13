@@ -1,63 +1,227 @@
-:root{
-    --cardWidth: clamp(300px, 400px,500px);
-    --cardHeight: 500px;
+:root {
+  --cardWidth: clamp(300px, 300px, 400px);
+  /* Gradient colors */
+  --g1: #6200ea;
+  --g2: #ec407a;
+  --g3: #fdd835;
 }
-body{
-background-color: red;
+
+body {
+  background-color: #131313;
+  color: #fff;
+  font-family: "Anek Latin", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  margin: 0;
+  line-height: 1.6em;
+  letter-spacing: 0.1rem;
+}
+h1 {
+  font-size: 32;
+}
+h2 {
+  font-size: 28;
+}
+h3 {
+  font-size: 24;
+}
+h4 {
+  font-size: 20;
+}
+button{
 color: #fff;
-font-size: 16px;
+border-radius: 50px;
+}
+button:focused{
+    transform: translateY(20px);
 }
 
-.cardWrapper{
-    width: 500px;
-    height: 500px;
-    z-index: 2;
+.wrapper {
+  height: calc(90vh);
+  margin-top: auto;
+}
+.random-menu{
+    width: 100vw;
+    height: 90vh;
+    color: #fff;
 
-    position: relative;
-    display: flex;
     left: 0;
     right: 0;
-
     margin: auto;
+    
+    display: flex;
+    flex-direction: column;   
+    justify-content: center;
 }
-.card{
-    width: var(--cardWidth);
-    height: var(--cardHeight);
-    z-index: 5;
-    position: absolute;
-
-    color: #fff;
-    background-color: #131313;
-    border: #131313 solid 2px;
-    border-radius: 20px;
-}
-.answer{
-    width: var(--cardWidth);
-    height: var(--cardHeight);
-    z-index: 4;
-    position: absolute;
-
-    color:#131313;
-    background-color: #fff;
-    border: #131313 solid 2px;
-    border-radius: 20px; 
-}
-
-.addCards{
-    display:flex;
+.random-menu form{
+  
+    display: flex;
     flex-direction: column;
-    gap: 2em;
-    width: 40vw;
+    align-items: center;
+}
+.random-menu form > button  {
+    width: 100px;
+    height: 50px;
+}
+/* Cards */
+.card-wrapper {
+  width: var(--cardWidth);
+  aspect-ratio: 1 / 1.6;
+  z-index: 2;
+
+  position: relative;
+  display: flex;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+
+  margin: auto;
+
+  color: #fff;
+
+  border: #fff solid 2px;
+  border-radius: 20px;
+}
+.card-wrapper:hover, button:hover {
+  background-position: 0% 0%;
+  transform: scale(1.05);
+  transition: background-position 350ms ease, transform 350ms ease;
+}
+.card-wrapper, button {
+  background: linear-gradient(
+    330deg,
+    transparent 0% 33%,
+    var(--g1) 66%,
+    var(--g2) 83.5%,
+    var(--g3) 100%
+  );
+  background-position: 100% 100%;
+  background-size: 300% 300%;
+  transition: background-position 350ms ease, transform 350ms ease;
+}
+.cardShow {
+  display: flex;
+  flex-direction: row;
 }
 
-.addCards input{
-    height: 2em;
+.card-content {
+  width: calc(100% - 4rem);
+  height: calc(100% - 4rem);
+  gap: 10%;
+
+  z-index: 5;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+.card-content div {
+  padding: 1rem;
 }
 
-@keyframes topCard {
-    0% {transform: translateX(25)}
-    25% {transform: translateX(25)}
-    50% {transform: translateX(25)}
-    75% {transform: translateX(25)}
-    100% {}
+.question,
+.answer {
+  width: calc(100%-1rem);
+  height: calc(100%);
+
+  border-radius: 20px;
+  z-index: 4;
+
+  justify-items: center;
+  text-align: center;
+  background-color: #ffffff3b;
+  color: #fff;
+}
+
+.addCards {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  width: 40vw;
+}
+
+.addCards input {
+  height: 2em;
+}
+/* Nav bar */
+.nav-bar {
+  width: 100vw;
+  height: 50px;
+  z-index: 10;
+  position: sticky;
+
+  background-color: #131313;
+  border-bottom: #fff 2px solid;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: row;
+  top: 0;
+  justify-content: center;
+}
+
+.nav-bar ul {
+  gap: 50px;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+/* Selecting cards */
+.selectors {
+  width: 100px;
+  height: 100px;
+
+  text-align: center;
+  align-self: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  animation-name: bounce;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+}
+.selectors > * {
+  align-self: center;
+  justify-self: center;
+}
+.selectors:hover span {
+  opacity: 100%;
+  transition: opacity 300ms;
+}
+.selectors > span {
+  opacity: 0%;
+  transition: opacity 300ms;
+}
+/* Animations */
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(25px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(25px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@media screen and (max-width: 600px) {
+  .nav-bar {
+    display: none;
+  }
+  .burger {
+    display: sticky;
+  }
+}
+/* Other */
+a:link, a:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: pointer;
 }

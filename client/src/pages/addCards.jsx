@@ -1,91 +1,79 @@
-import Link from 'next/link';
-import React, {useState} from 'react'
-import handlePost from './api/postCard';
+import Link from "next/link";
+import React, { useState, useRef } from "react";
+import handlePost from "./api/postCards";
+import Header from "../components/Header";
 
 const addCards = () => {
-    const [name, setName] = useState('')
-    const [question, setQuestion] = useState('')
-    const [answer, setAnswer] = useState('')
-    const [author, setAuthor] = useState('')
-    const [tags, setTags] = useState([])
-    const [tag, setTag] = useState('')
+  const [tags, setTags] = useState([]);
 
-    function addTag(e) {
-      e.preventDefault();
-      setTags((prevState) => {
-        return ([...prevState,  tag])}
-        )
-      setTag('')
-    }
+  const nameRef = useRef("");
+  const questionRef = useRef("");
+  const answerRef = useRef("");
+  const authorRef = useRef("");
+  const tagRef = useRef("");
 
-    let tempCard = {
-          "name": name,
-          "question": question, 
-          "answer": answer, 
-          "author": author, 
-          "tags": tags
-        }
+  function addTag(e) {
+    e.preventDefault();
 
-    async function handleSubmit(e) {
-      e.preventDefault();
-      if(tags.length >  0){
-        handlePost(tempCard)
-        setName('')
-        setQuestion('')
-        setAnswer('')
-        setAuthor('')
-        setTag('')
-        setTags([])
+    setTags((prevState) => {
+      return [...prevState, tagRef.current.value];
+    });
+  }
+
+  let tempCard = {
+    name: nameRef.current.value,
+    question: questionRef.current.value,
+    answer: answerRef.current.value,
+    author: authorRef.current.value,
+    tags: tags,
+  };
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (tags.length > 0) {
+      handlePost(tempCard);
+      alert("Card added!")
+      clear();
     } else {
-        alert('Please enter some tags!')
+      alert("Please enter some tags!");
     }
-    } 
+  }
+
+  function clear() {
+      nameRef.current.value = '';
+      questionRef.current.value = '';
+      answerRef.current.value = '';
+      authorRef.current.value = '';
+      tagRef.current.value = '';
+  }
 
   return (
     <div>
-      <Link href='/'>Homepage</Link>
-      <form className='addCards' onSubmit={handleSubmit}>
-        <input
-          placeholder="Name"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          placeholder="Question"
-          type="text"
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-        />
-        <input 
-          placeholder="Answer" 
-          type="text"  
-          value={answer} 
-          onChange={(e) => setAnswer(e.target.value)}/>
-        <input 
-          placeholder="Author" 
-          type="text" 
-          value={author} 
-          onChange={(e) => setAuthor(e.target.value)}/>
-        <input 
-          placeholder="Tag" 
-          type="text" 
-          value={tag} 
-          onChange={(e) => setTag(e.target.value)}/>
+      <Header />
 
-        <button onClick={addTag} >Add tag</button>
+      <Link href="/">
+        <button>Homepage</button>
+      </Link>
+      <form className="addCards" onSubmit={handleSubmit}>
+        <input placeholder="Name" type="text" ref={nameRef} />
+        <input placeholder="Question" type="text" ref={questionRef} />
+        <input placeholder="Answer" type="text" ref={answerRef} />
+        <input placeholder="Author" type="text" ref={authorRef} />
+        <input placeholder="Tag" type="text" ref={tagRef} />
+
+        <button onClick={addTag}>Add tag</button>
 
         <input value="Send!" type="submit" />
       </form>
 
       <p>List of tags:</p>
       <ul>
-        {tags?.map((tag, index) =>{
-            return (<li key={index}>{tag}</li>)
+        {tags.map((tag, index) => {
+          return <li key={index}>{tag}</li>;
         })}
       </ul>
     </div>
   );
-}
+};
 
-export default addCards
+export default addCards;
