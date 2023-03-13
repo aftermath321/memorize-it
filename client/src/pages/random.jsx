@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import getHandle from "./api/getCards";
-import Link from "next/link";
-import Card from "../components/Card";
 import CardShow from "./../components/CardShow";
-import Header from "../components/Header";
 
 const random = () => {
   const [cardList, setCardList] = useState([]);
@@ -24,8 +21,14 @@ const random = () => {
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
-    createRandomList();
+    if (cardNumber > 0) {
+      event.preventDefault();
+      createRandomList();
+    } else {
+            event.preventDefault();
+
+      alert("Please select more than 0.");
+    }
   }
 
   function randomNumber(max) {
@@ -63,28 +66,23 @@ const random = () => {
       return <CardShow cards={randomList} />;
     } else {
       return (
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <p>How many cards in a set?</p>
-            <span>{cardNumber}</span>
-            <input
-              type="range"
-              max={cardList.length}
-              min="0"
-              value={cardNumber}
-              onChange={(e) => handleChange(e)}
-            />
-            <button type="submit">Go!</button>
-          </form>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <p>How many cards in a set?</p>
+          <span>{cardNumber}</span>
+          <input
+            type="range"
+            max={cardList.length}
+            min="0"
+            value={cardNumber}
+            onChange={(e) => handleChange(e)}
+          />
+          <button type="submit">Go!</button>
+        </form>
       );
     }
   }
 
-  return (
-    <div className="random-menu">
-
-      {randomOptionsMenu()}
-    </div>
-  );
+  return <div className="random-menu">{randomOptionsMenu()}</div>;
 };
 
 export default random;

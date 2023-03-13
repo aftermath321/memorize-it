@@ -28,6 +28,13 @@ h3 {
 h4 {
   font-size: 20;
 }
+button{
+color: #fff;
+border-radius: 50px;
+}
+button:focused{
+    transform: translateY(20px);
+}
 
 .wrapper {
   height: calc(90vh);
@@ -75,12 +82,12 @@ h4 {
   border: #fff solid 2px;
   border-radius: 20px;
 }
-.card-wrapper:hover {
+.card-wrapper:hover, button:hover {
   background-position: 0% 0%;
   transform: scale(1.05);
   transition: background-position 350ms ease, transform 350ms ease;
 }
-.card-wrapper {
+.card-wrapper, button {
   background: linear-gradient(
     330deg,
     transparent 0% 33%,
